@@ -27,6 +27,21 @@ source-repository head
   type: git
   location: https://github.com/Me/my-site
 
+library
+  exposed-modules:
+    Site
+  other-modules:
+    Paths_slick_template
+  hs-source-dirs:
+    src
+  build-depends:
+   directory,
+   text,
+   process,
+   base >=4.7 && <5,
+   raw-strings-qq,
+   text-format-simple
+
 executable build-site
   main-is: Main.hs
   other-modules:
@@ -42,6 +57,8 @@ executable build-site
     , lens-aeson
     , shake
     , slick
+    , slick-template
     , text
     , unordered-containers
+
   default-language: Haskell2010

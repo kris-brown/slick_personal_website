@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head profile="http://www.w3.org/2005/10/profile">
     <meta charset="UTF-8">
     <meta name="description" content="{{siteTitle}}">
@@ -11,13 +11,61 @@
 </head>
 <body>
     {{>site/templates/header.html}}
-<div id="page">
-            <section class="table-of-contents">
-                <h1>All Posts</h1>
-                <div class="metadata">
-                </div>
-                {{>site/templates/post-list.html}}
-        </section>
-</div>
+
+
+<img src=" ./images/headshot.jpg" align=right width="400" />
+
+<h1>Kris Brown</h1>
+PhD Student<br>
+Stanford Department of Chemical Engineering<br>
+SUNCAT Center for Interface Science and Catalysis: <a href="https://suncat.stanford.edu/research/theoretical-methods">Theoretical Methods</a><br>
+<hr>
+Email: ksb @ stanford.edu <br>
+<a href="~ksb/docs/CV.pdf"> Curriculum Vitae</a> / <a href="~ksb/docs/Resume.pdf"> R&eacute;sum&eacute;</a><br>
+<hr>
+
+<h2><u>Research projects</u> </h2><br>
+
+<h3> Knowledge representation and data integration </h3>
+
+<a href="http://www.modelyst.io.s3-website-us-west-1.amazonaws.com"><u>Declarative specification of databases</u></a> <br>
+Scientists modeling complicated phenomena don't use explicit (formally-specified) models.
+This is pragmatic, given current available open-source tools, but informal reasoning ulimately
+leads to serious challenges in communicating scientific results clearly and sharing data.
+A relational database backend is important for a scalable modeling tool,
+but a SQL-less interface is also crucial: the complexity of managing database implementation details
+quickly becomes unmanagable and unextensible as the model complexity increases. I develop
+a Python EDSL to help scientists generate relational databases from a natural declaration
+of scientific facts and to naturally query and publicly communicate their knowledge base. <br><br>
+
+<a href="https://arxiv.org/pdf/1903.10579.pdf"><u>Heterogenous data integration, using Category Theory</u></a><br>
+There is little standardization in how data is to be represented and stored in many scientific fields.
+However, the varying schemas of different researchers contain
+significant overlap in information, and for data-driven fields it is especially
+beneficial to be able to freely switch from one frame of reference to another.
+<a href="https://conexus.ai/cql"> Categorical Query Language</a>, a tool developed by
+Conexus AI, allows for specification of data migration and integration
+in a declarative and clean process. I aim to show the utility of this approach
+in the field of computational chemistry, in collaboration with <a href="http://wisnesky.net/">Ryan Wisnesky</a>.<br><br>
+
+<h3>Machine learning applied to computational chemistry</h3>
+
+<a href="~ksb/images/CS230.png"><u>A Chemical Analog to the Convolution Operation</u></a> <br>
+Along with <a href="https://suncat.stanford.edu/people/brian-andrew-rohr">Brian
+  Rohr</a> and <a href="https://suncat.stanford.edu/people/michael-statt">Michael
+  Statt</a>, I develop models which quickly compute
+high-level properties of atomic systems from cheap descriptors by leveraging
+recent advances in ML (e.g. graph-convolutional and message-passing networks).
+The link goes to our poster which was awarded 1st place in Andrew Ng's
+<a href="http://cs230.stanford.edu/">CS 230: Deep Learning</a> course (Winter 2018).<br><br>
+
+<a href="http://www.slac.stanford.edu/~vossj/project/xc-functionals/"><u>Development of functionals for Density Functional Theory</u></a> <br>
+Simulation of chemical reactions using first-principles techniques requires a
+theoretical framework that is able to describe a wide range of electronic interactions.
+Under the direction of <a href="http://www.slac.stanford.edu/~vossj/">Johannes
+  Voss</a>, I develop new meta exchange-correlation functionals with a semi-empirical approach,
+fitting the functional form against higher level of theory and experimental benchmark data.
+By using Bayesian statistics, we enable uncertainty estimation of the computed reaction energies. <br><br>
+
 
 {{>site/templates/footer.html}}

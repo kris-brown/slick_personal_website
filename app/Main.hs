@@ -1,6 +1,6 @@
-{-# LANGUAGE NamedFieldPuns        #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE DeriveAnyClass    #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE NamedFieldPuns    #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Main where
@@ -11,23 +11,24 @@ import           Data.Aeson                 as A
 import           Data.Aeson.Lens
 import           Development.Shake
 import           Development.Shake.Classes
-import           Development.Shake.Forward
 import           Development.Shake.FilePath
+import           Development.Shake.Forward
 import           GHC.Generics               (Generic)
 import           Slick
 
-import qualified Data.HashMap.Lazy as HML
+import qualified Data.HashMap.Lazy          as HML
 import qualified Data.Text                  as T
 
+import           Site                       (exportHTML)
 ---Config-----------------------------------------------------------------------
 
 siteMeta :: SiteMeta
 siteMeta =
     SiteMeta { siteAuthor = "Me"
-             , baseUrl = "https://example.com"
-             , siteTitle = "My Slick Site"
-             , twitterHandle = Just "myslickhandle"
-             , githubUser = Just "myslickgithubuser"
+             , baseUrl = "https://web.stanford.edu/~ksb/"
+             , siteTitle = "Kris' Personal Site"
+             , linkedinUser = Just "kristophersbrown"
+             , githubUser = Just "kris-brown"
              }
 
 outputFolder :: FilePath
@@ -42,11 +43,11 @@ withSiteMeta (Object obj) = Object $ HML.union obj siteMetaObj
 withSiteMeta _ = error "only add site meta to objects"
 
 data SiteMeta =
-    SiteMeta { siteAuthor    :: String
-             , baseUrl       :: String -- e.g. https://example.ca
-             , siteTitle     :: String
-             , twitterHandle :: Maybe String -- Without @
-             , githubUser    :: Maybe String
+    SiteMeta { siteAuthor   :: String
+             , baseUrl      :: String -- e.g. https://example.ca
+             , siteTitle    :: String
+             , linkedinUser :: Maybe String
+             , githubUser   :: Maybe String
              }
     deriving (Generic, Eq, Ord, Show, ToJSON)
 
@@ -74,12 +75,29 @@ buildIndex posts' = do
   let indexInfo = IndexInfo {posts = posts'}
       indexHTML = T.unpack $ substitute indexT (withSiteMeta $ toJSON indexInfo)
   writeFile' (outputFolder </> "index.html") indexHTML
+-- | given a list of posts this will build a table of contents
+buildNotes :: [Post] -> Action ()
+buildNotes _ = do
+  notesT <- compileTemplate' "site/templates/notes.html"
+  -- let indexInfo = IndexInfo {posts = posts'}
+  let notesHTML = T.unpack $ substitute notesT ()
+  writeFile' (outputFolder </> "notes.html") notesHTML
+
+buildAbout :: [Post] -> Action ()
+buildAbout posts' = do
+    aboutT <- compileTemplate' "site/templates/about.html"
+    let aboutInfo = IndexInfo {posts = posts'}
+        aboutHTML = T.unpack $ substitute aboutT (withSiteMeta $ toJSON aboutInfo)
+    writeFile' (outputFolder </> "about.html") aboutHTML
 
 -- | Find and build all posts
 buildPosts :: Action [Post]
 buildPosts = do
   pPaths <- getDirectoryFiles "." ["site/posts//*.md"]
   forP pPaths buildPost
+
+buildAluffiPosts :: Action [Post]
+buildAluffiPosts = undefined
 
 -- | Load a post, process metadata, write it to output, then return the post object
 -- Detects changes to either post content or template
@@ -100,7 +118,7 @@ buildPost srcPath = cacheAction ("build" :: T.Text, srcPath) $ do
 -- | Copy all static files from the listed folders to their destination
 copyStaticFiles :: Action ()
 copyStaticFiles = do
-    filepaths <- getDirectoryFiles "./site/" ["images//*", "css//*", "js//*"]
+    filepaths <- getDirectoryFiles "./site/" ["images//*", "css//*", "js//*","media//*","docs//*"]
     void $ forP filepaths $ \filepath ->
         copyFileChanged ("site" </> filepath) (outputFolder </> filepath)
 
@@ -109,10 +127,14 @@ copyStaticFiles = do
 buildRules :: Action ()
 buildRules = do
   allPosts <- buildPosts
+  -- aluffiPosts <- buildAluffiPosts
+  buildNotes undefined -- aluffiPosts
   buildIndex allPosts
+  buildAbout allPosts
   copyStaticFiles
 
 main :: IO ()
 main = do
+  exportHTML
   let shOpts = forwardOptions $ shakeOptions { shakeVerbosity = Chatty}
   shakeArgsForward shOpts buildRules

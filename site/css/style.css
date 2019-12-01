@@ -1,0 +1,10 @@
+.right-sidebar {
+  position: absolute;
+  top: 0.75em;
+  right: 0.7em;
+  display: flex;
+}
+
+.right-sidebar > * {
+  margin-left: 12px;
+}

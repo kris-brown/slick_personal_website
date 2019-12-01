@@ -182,60 +182,12 @@ function enable_global_outlining() {
 			});
 	}
 
-	/*
-	// add link to deactive outlining. I wanted 2 links, „expand all“ and „contract all“, but the second one isn't of much use (and reloading the page does the same)
-	// otros posibles nombres: "(expandir completamente)"
-	var expAll_link = $( document.createElement('a') ).text("(ver todo seguido, sin esquemado)").addClass("expandAll").click(disable_global_outlining);
-	$( $("div.outline-2")[0] ).find(">h2") .append(expAll_link);
-	*/
+	
 
 	var par = $('<p />');
-	par.append(document.createTextNode("Clica una sección para abrirla/cerrarla."));
-	par.append(	$( document.createElement('a') ).text("Cerrar todas (ver esquema general).").addClass("globalexpandtool").click(close_all_sections));
-	par.append(	$( document.createElement('a') ).text("Abrir todas (ver mucho texto).").addClass("globalexpandtool").click(open_all_sections));
+	par.append(	$( document.createElement('a') ).text("Collapse all.").addClass("globalexpandtool").click(close_all_sections));
+	par.append(	$( document.createElement('a') ).text("Expand all.").addClass("globalexpandtool").click(open_all_sections));
 	$("div#table-of-contents").after(par);
-
-
-	/*
-	// start with contracted TOC and headers   ← m5.2017: disabled because it has a huge penalty towards Google (hidden content won't be indexed)
-
-	if(HOW_TO_HIDE=='hide'){
-		$("#text-table-of-contents").hide();
-	} else {
-		console.error("Not impl.");
-	}
-	for(var i=2;i<=7;++i) {
-		$(".outline-text-"+i).parent().addClass("orgjq-contracted");
-		if(HOW_TO_HIDE=='hide'){
-			/////		 $(".outline-text-"+i).hide();
-			$(".outline-text-"+i).hide();
-		} else if(HOW_TO_HIDE=='scrollbar'){
-			//$(".outline-text-"+i).css({"height":"100px","overflow-y":"auto","opacity":"0.3"});
-			// $(".outline-text-"+i).parent().css({"height":"100px","overflow-y":"auto","opacity":"0.3"});
-			// console.error("nada");
-		} else {
-			console.error("Not impl.");
-		}
-	}
-
-	// inside the h2 headers, all (now unseen) headers are also contracted
-	for(var i=2;i<=7;++i) {
-		$("h"+i).each(
-			function(){
-				$(this).parent().removeClass("orgjq-expanded").addClass("orgjq-contracted");
-				if(HOW_TO_HIDE=='hide'){
-					$(this).next("div").nextAll().hide();$(this).next("div").hide();
-				} else if(HOW_TO_HIDE=='scrollbar'){
-					// $(this).next("div").nextAll().css({"height":"100px","overflow-y":"auto","opacity":"0.3"});
-					$(this).next("div").nextAll().css({"height":"100px","overflow-y":"auto","opacity":"0.3"});
-					// console.error("nada2.");
-				} else {
-					console.error("Not impl.");
-				}
-
-			});
-	}
-	*/
 
 	// alternatively: mark everything as open
 	for(var i=2;i<=7;++i) {

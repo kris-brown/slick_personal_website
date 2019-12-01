@@ -1,0 +1,32 @@
+/* esto aplica al prita de esquemadorg.js */
+
+/* aÃºn en pruebas y con colores feos */
+
+.outline-2, .outline-3, .outline-4, .outline-5, .outline-6, .outline-7 {
+border-width:1px; border-style:solid; border-radius:2px;
+border-color: rgba(0,0,0,0.3);
+
+box-shadow: 3px 3px 2px rgba(0,0,0,0.3);
+margin: 5px;
+
+
+margin-left: 10px;
+padding-left: 5px;
+}
+
+
+.orgjq-contracted {background: #fee;}
+.orgjq-expanded {background: #eef;}
+.orgjq-expanded.orgjq-targeted {background: #e70;}
+
+/*
+a.expandAll {font-size: 50%; text-decoration: none; border: 0px outset blue; margin-left:20px; float:right;}
+a.expandAll:hover {background: white;}
+*/
+
+a.globalexpandtool {
+	cursor: pointer; border:2px outset white;
+	margin-left:0.5em;
+	margin-right:0.5em;
+	padding:2px;
+}

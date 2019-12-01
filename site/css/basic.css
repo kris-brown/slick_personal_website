@@ -1,0 +1,69 @@
+/*
+Algunas partes de esto afectan sÃ³lo a /hacer/ y lo hago para sobreescribir los ajustes por defecto de org-mode
+*/
+body {margin:4%;
+padding-bottom: 100px;}
+p,dd {text-indent: 20px;}
+code,pre {color:green;}
+div+hr {margin-top: 40px;}
+hr+p {margin-top: 40px;}
+
+h1 {margin-bottom: 30px;}
+h2 {clear:both; text-decoration:underline;}
+dt {margin-top:20px; font-weight:bold; color:maroon;}
+
+blockquote { margin-bottom: 25px;
+font-size: small;
+}
+
+/*
+sans-serif queda muchÃ­simo mejor en esta secciÃ³n en concreto; Times queda ilegible a veces
+ */
+html { font-family: sans-serif; font-size: 12pt; }
+
+div#barra_secciones {border: 1px double black; font-variant: small-caps; background: #eee;}
+div#barra_secciones p  {margin:0px; padding:3px;}
+div#barra_secciones a {margin-left: 10px;}
+
+
+
+/* Ahora viene el estilo. Hice varias pruebas (estÃ¡n en cdv) pero aquÃ­ pongo sÃ³lo el ganador */
+
+/* p2: Estilo no tan asqueroso; incluso majo. Combina bÃ¡sicamente 3 colores (dorado, salmÃ³n, azul cielo). No tiene fondo negro pero se lee mucho mejor que con fondo blanco. */
+body{
+background: white;
+color: black;
+}
+a { color: #900; }
+a:hover { color: red; }
+div#barra_secciones {background: #d1cb9d;}
+
+/* cambios que sobreescriben colores predeterminados de mi org-info-jq.css. Mayor especificidad */
+html .orgjq-contracted {
+	/* no-background: #d1a19d; */
+	background: #d1cb9d;
+	background: inherit;
+	/* no-filter: blur(1px); */
+	opacity: 0.5;
+}
+html .orgjq-contracted span[class^="section-number"]:after {content:".....";}
+html .orgjq-expanded {
+	/* no-background: #d1cb9d; */
+	background: inherit;
+}
+html .orgjq-expanded.orgjq-targeted {
+	/* no-background: #d1c569; */
+	background: inherit;
+}
+html a.globalexpandtool {
+border:2px outset #d1cb9d;
+}
+
+/* cambios para cosas de org */
+pre {background-color: #002; font-family: monospace;}
+span.timestamp-kwd, span.timestamp {color: #555;}
+/* span.todo, span.done {background: #002;border:1px inset #002;} */
+span.todo, span.done {background: #9db8d2;border:1px outset #002;
+color: black;
+}
+span.done {background: #9ed19d;}

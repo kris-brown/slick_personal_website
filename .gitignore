@@ -2,6 +2,9 @@
 *~
 .shake
 
-docs/
 
 build/
+
+docs/
+
+.DS_Store

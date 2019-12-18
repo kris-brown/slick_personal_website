@@ -19,7 +19,6 @@ import           Slick
 import qualified Data.HashMap.Lazy          as HML
 import qualified Data.Text                  as T
 
-import           Site                       (exportHTML)
 ---Config-----------------------------------------------------------------------
 
 siteMeta :: SiteMeta
@@ -135,6 +134,6 @@ buildRules = do
 
 main :: IO ()
 main = do
-  exportHTML
+  -- exportHTML -- NO LONGER DOING ORG MODE
   let shOpts = forwardOptions $ shakeOptions { shakeVerbosity = Chatty}
   shakeArgsForward shOpts buildRules

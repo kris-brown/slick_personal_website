@@ -134,6 +134,5 @@ buildRules = do
 
 main :: IO ()
 main = do
-  -- exportHTML -- NO LONGER DOING ORG MODE
   let shOpts = forwardOptions $ shakeOptions { shakeVerbosity = Chatty}
   shakeArgsForward shOpts buildRules
